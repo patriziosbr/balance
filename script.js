@@ -13,10 +13,9 @@ $("#judge_range").on("input", function() {
   });
   //balance scale on drag
 
-  
-  // hit the balance scale plate
-  $('#bntOne').click("on", function(e) {
-    e.preventDefault();
+ 
+    // hit the balance scale plate
+  $('#bntOne').click("on", function() {
     var current_value = parseInt($('#judge_range').val());
     var valueAtTop = current_value + 120;
     var classname = $(this).attr("class");
@@ -25,11 +24,8 @@ $("#judge_range").on("input", function() {
         return;
       else {
         for (let index = 0; index < 6; index++) {
-          $('#judge_range').val(current_value + 20);
-          $("#judge_rangeOutput").val(current_value + " gr" );
-          $("#prejudges_range").val(1000 - current_value);
-          $("#preJudge_rangeOutput").val(1000 - current_value + " gr");
-            var current_value = parseInt($('#judge_range').val());
+          addValue();
+          var current_value = parseInt($('#judge_range').val());
             s = Math.sin(current_value*Math.PI/180) * 2;
             s += 100 - (s-0) * 50 ;
             // parte 1 da salvare in json
@@ -38,19 +34,21 @@ $("#judge_range").on("input", function() {
             //
             if (current_value === valueAtTop){
               //apice della curva
-              console.log('20 torna indietro');
-              for (let index = 0; index < 7; index++) {
+              addValue();
+              console.log(current_value, 'torna indietro');
+   
+              for (let index = 0; index < 6; index++) {
                 $('#judge_range').val(current_value - 20);
                 $("#judge_rangeOutput").val(current_value + " gr" );
                 $("#prejudges_range").val(1000 - current_value);
                 $("#preJudge_rangeOutput").val(1000 - current_value + " gr");
-                  var current_value = parseInt($('#judge_range').val());
-                  s = Math.sin(current_value*Math.PI/180) * 2;
-                  s += 100 - (s-0) * 50;
-                  // parte 1 da salvare in json
-                  console.log(current_value, "hit 2" );
-                  console.log(s);
-                  //
+                var current_value = parseInt($('#judge_range').val());
+                s = Math.sin(current_value*Math.PI/180) * 2;
+                s += 100 - (s-0) * 50;
+                // parte 1 da salvare in json
+                console.log(current_value, "hit 2" );
+                console.log(s);
+                //
               }
             }
         }
@@ -59,8 +57,15 @@ $("#judge_range").on("input", function() {
   })
   // hit the balance scale plate
 
-function incrementAfterHit(){
-  
+
+
+    
+function addValue() {
+  var current_value = parseInt($('#judge_range').val());
+  $('#judge_range').val(current_value + 20);
+  $("#judge_rangeOutput").val(current_value + " gr" );
+  $("#prejudges_range").val(1000 - current_value);
+  $("#preJudge_rangeOutput").val(1000 - current_value + " gr");
 }
 
 
